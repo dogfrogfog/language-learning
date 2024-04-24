@@ -11,6 +11,7 @@ export default function WordsList() {
   const handleClearClick = () => {
     localStorage.setItem(localStorageKey, "{}");
 
+    setWords([]);
     router.refresh();
   };
 

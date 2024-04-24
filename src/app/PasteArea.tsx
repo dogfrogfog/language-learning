@@ -13,7 +13,7 @@ export default function PasteArea() {
     const currentWords: string[] = currentSavedData?.words || [];
     const isWordAlreadySaved = currentWords.find((w) => w === clipboardData);
 
-    if (isWordAlreadySaved) return;
+    if (isWordAlreadySaved || !clipboardData) return;
 
     const newSavedData = { words: currentWords.concat(clipboardData) };
 
