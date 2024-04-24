@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 
 import { localStorageKey } from "@/app/constants";
 import { useEffect, useState } from "react";
+import PasteArea from "../PasteArea";
 
 export default function WordsList() {
   const [words, setWords] = useState<string[]>([]);
@@ -24,7 +25,8 @@ export default function WordsList() {
 
   return (
     <div className="flex flex-col gap-12">
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-3">
+        {/* <PasteArea /> */}
         <button
           className="bg-red-200 rounded-xl p-3"
           onClick={handleClearClick}
