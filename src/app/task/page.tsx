@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const [words, setWords] = useState<string[]>([]);
   const [formWordsData, setFormWordsData] = useState<string>(`[]`);
@@ -17,11 +18,14 @@ export default function Page() {
     const words: string[] = JSON.parse(lsData)?.words || [];
 
     setWords(words);
+
+    if (
+      navigator.userAgent.match(/iPhone|iPad|iPod/i) ||
+      navigator.userAgent.match(/Android/i)
+    )
+      setIsMobile(true);
   }, []);
 
-  const isMobile =
-    navigator.userAgent.match(/iPhone|iPad|iPod/i) ||
-    navigator.userAgent.match(/Android/i);
   const isProd = process.env.NODE_ENV === "production";
 
   return (
