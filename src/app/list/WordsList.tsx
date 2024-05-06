@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { localStorageKey } from "@/app/constants";
 import { useEffect, useState } from "react";
 import PasteArea from "../PasteArea";
+import Link from "next/link";
 
 export default function WordsList() {
   const [words, setWords] = useState<string[]>([]);
@@ -44,6 +45,17 @@ export default function WordsList() {
           </div>
         ))}
       </div>
+
+      {words.length > 0 && (
+        <div className="p-10 flex justify-center">
+          <Link
+            href="/task"
+            className="px-5 py-2 text-xl bg-yellow-400 rounded-md"
+          >
+            Start exercise with saved words
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

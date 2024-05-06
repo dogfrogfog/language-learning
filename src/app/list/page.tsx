@@ -14,15 +14,6 @@ export default function Page() {
 
         <WordsList />
       </div>
-
-      <div className="p-10 flex justify-center">
-        <Link
-          href="/task"
-          className="px-5 py-2 text-xl bg-yellow-400 rounded-md"
-        >
-          Start exercise with saved words
-        </Link>
-      </div>
     </main>
   );
 }

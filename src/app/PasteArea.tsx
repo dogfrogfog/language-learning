@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "sonner";
 import { localStorageKey } from "./constants";
 
 export default function PasteArea() {
@@ -13,11 +13,32 @@ export default function PasteArea() {
     const currentWords: string[] = currentSavedData?.words || [];
     const isWordAlreadySaved = currentWords.find((w) => w === clipboardData);
 
-    if (isWordAlreadySaved || !clipboardData) return;
+    if (isWordAlreadySaved) {
+      toast("Word is already saved 🚫");
 
-    const newSavedData = { words: currentWords.concat(clipboardData) };
+      return;
+    }
+
+    if (!clipboardData) {
+      toast("Copy word first");
+
+      return;
+    }
+
+    console.log(!clipboardData.match(/[A-Za-z]/));
+
+    if (!clipboardData.match(/^[A-Za-z]+$/g)) {
+      toast("Only no-space english words allowed 🚫");
+
+      return;
+    }
+
+    const newSavedData = {
+      words: currentWords.concat(clipboardData.toLowerCase()),
+    };
 
     localStorage.setItem(localStorageKey, JSON.stringify(newSavedData));
+    toast("Word is saved ✅");
   };
 
   return (
