@@ -1,23 +1,16 @@
 "use client";
+
+import { useContext } from "react";
 import { toast } from "sonner";
-import { localStorageKey } from "./constants";
+import { DataContext } from "@/components/DataContext";
 
 export default function PasteArea() {
+  const { words, addNewWord } = useContext(DataContext);
+
   const pasteFromClipboard = async () => {
     const clipboardData = await navigator.clipboard
       .readText()
-      .then((text) => text);
-    const currentSavedData = JSON.parse(
-      localStorage.getItem(localStorageKey) || "{}"
-    );
-    const currentWords: string[] = currentSavedData?.words || [];
-    const isWordAlreadySaved = currentWords.find((w) => w === clipboardData);
-
-    if (isWordAlreadySaved) {
-      toast("Word is already saved 🚫");
-
-      return;
-    }
+      .then((text) => text.toLowerCase().trim());
 
     if (!clipboardData) {
       toast("Copy word first");
@@ -25,19 +18,22 @@ export default function PasteArea() {
       return;
     }
 
-    console.log(!clipboardData.match(/[A-Za-z]/));
-
     if (!clipboardData.match(/^[A-Za-z]+$/g)) {
       toast("Only no-space english words allowed 🚫");
 
       return;
     }
 
-    const newSavedData = {
-      words: currentWords.concat(clipboardData.toLowerCase()),
-    };
+    const isWordAlreadySaved = words.find((w) => w === clipboardData);
 
-    localStorage.setItem(localStorageKey, JSON.stringify(newSavedData));
+    if (isWordAlreadySaved) {
+      toast("Word is already saved 🚫");
+
+      return;
+    }
+
+    addNewWord(clipboardData);
+
     toast("Word is saved ✅");
   };
 
