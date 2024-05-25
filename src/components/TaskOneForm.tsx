@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { WordData } from "../actions";
+import { WordData } from "@/app/actions";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 

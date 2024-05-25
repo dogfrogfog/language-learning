@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { WordData, getWordsOptions } from "@/app/actions";
-import { localStorageKey } from "../constants";
-import Form from "./Form";
+import { localStorageKey } from "@/app/constants";
+import Form from "@/components/TaskOneForm";
 import { cn } from "@/lib/utils";
+import PageTitle from "@/components/PageTitle";
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +30,8 @@ export default function Page() {
   const isProd = process.env.NODE_ENV === "production";
 
   return (
-    <div className="flex justify-center items-center p-4">
+    <div className="p-6 space-y-6">
+      <PageTitle className="my-4" title="Guess the word" />
       {(isProd ? isMobile : true) && !JSON.parse(formWordsData).length ? (
         <button
           disabled={isLoading}
