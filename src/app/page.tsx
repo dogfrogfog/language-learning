@@ -1,15 +1,15 @@
-import Link from "next/link";
-import PasteArea from "./PasteArea";
+import PageTitle from "@/components/PageTitle";
+import PasteWordArea from "@/components/PasteWordArea";
+import InputWord from "@/components/InputWord";
 
 export default function Page() {
   return (
-    <main className="min-h-screen p-3 flex items-center justify-center gap-6">
-      <Link href="/words" className="w-full">
-        <div className="text-center text-xl p-6 bg-slate-200 rounded-xl">
-          Go to list of saved words
-        </div>
-      </Link>
-      <PasteArea />
-    </main>
+    <div className="p-3">
+      <PageTitle className="my-4" title="Home" />
+      <div className="flex w-full gap-8 flex-col">
+        <PasteWordArea />
+        <InputWord />
+      </div>
+    </div>
   );
 }
