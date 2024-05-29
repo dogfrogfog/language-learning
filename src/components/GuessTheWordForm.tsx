@@ -1,19 +1,16 @@
 "use client";
+
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { WordData } from "@/app/actions";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-const MultiStepForm = ({
+const GuessTheWordForm = ({
   wordsData,
-  setFormWordsData,
 }: {
   wordsData: (WordData & { value: string })[];
-  setFormWordsData: Dispatch<SetStateAction<string>>;
 }) => {
-  const router = useRouter();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   if (!wordsData) return null;
@@ -29,6 +26,11 @@ const MultiStepForm = ({
     setStep(step + 1);
   };
 
+  const answerOptions = [
+    wordsData[step]?.value,
+    ...(wordsData[step]?.alternativeOptions || []),
+  ].sort(() => 0.5 - Math.random());
+
   return (
     <div className="px-10 min-h-screen">
       {step < wordsData.length && (
@@ -41,17 +43,13 @@ const MultiStepForm = ({
             </p>
           </div>
           <div className="mt-20 space-y-6">
-            <button
-              className="block w-40 p-3 text-center bg-yellow-200 rounded"
-              onClick={() => handleOptionSelect(wordsData[step].value, true)}
-            >
-              {wordsData[step].value}
-            </button>
-            {wordsData[step].alternativeOptions.map((v) => (
+            {answerOptions.map((v) => (
               <button
                 key={v}
                 className="block w-40 p-3 text-center bg-yellow-200 rounded"
-                onClick={() => handleOptionSelect(v, false)}
+                onClick={() =>
+                  handleOptionSelect(v, v === wordsData[step].value)
+                }
               >
                 {v}
               </button>
@@ -76,22 +74,13 @@ const MultiStepForm = ({
               </div>
             ))}
           </div>
-          <button
-            onClick={() => {
-              setFormWordsData("[]");
-              setStep(0);
-              setAnswers([]);
-
-              router.push("list");
-            }}
-            className="p-3 rounded bg-orange-200"
-          >
+          <Link href="/tasks" className="p-3 rounded bg-orange-200">
             Back to list of words
-          </button>
+          </Link>
         </div>
       )}
     </div>
   );
 };
 
-export default MultiStepForm;
+export default GuessTheWordForm;

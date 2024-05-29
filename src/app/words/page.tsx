@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <div className="p-6">
       <div className="flex justify-between my-4">
-        <PageTitle title="List of words" />
+        <PageTitle title={`List of words (${words.length})`} />
         <button
           className="bg-red-500 px-2 rounded font-bold text-white"
           onClick={() => clearWords()}
