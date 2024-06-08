@@ -1,19 +1,19 @@
 "use client";
 
 import { useState, useContext } from "react";
-import { GuessTheWordData, getGuessTheWordData } from "@/app/actions";
-import GuessTheWordForm from "@/components/tasksForms/GuessTheWordForm";
+import { FindTheMistakeData, getFindTheMistakeData } from "@/app/actions";
+import FindTheMistakeForm from "@/components/tasksForms/FindTheMistakeForm";
 import PageTitle from "@/components/PageTitle";
 import { DataContext } from "@/components/DataContext";
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
   const { words } = useContext(DataContext);
-  const [generatedData, setGeneratedData] = useState<GuessTheWordData[]>([]);
+  const [generatedData, setGeneratedData] = useState<FindTheMistakeData[]>([]);
 
   return (
     <div className="p-6 space-y-6">
-      <PageTitle className="my-4" title="Guess the word" />
+      <PageTitle className="my-4" title="Find the mistake" />
       {generatedData.length === 0 ? (
         <button
           disabled={isLoading}
@@ -22,7 +22,9 @@ export default function Page() {
 
             setIsLoading(true);
             try {
-              const { data } = await getGuessTheWordData(words.join(","));
+              const { data } = await getFindTheMistakeData(words.join(","));
+
+              console.log(data);
 
               setGeneratedData(data);
             } catch (e) {
@@ -36,11 +38,11 @@ export default function Page() {
           Start
         </button>
       ) : (
-        <GuessTheWordForm
-          wordsData={generatedData.map((v, i) => ({
-            value: words[i],
-            ...v,
-          }))}
+        <FindTheMistakeForm
+        // wordsData={generatedData.map((v, i) => ({
+        //   value: words[i],
+        //   ...v,
+        // }))}
         />
       )}
     </div>

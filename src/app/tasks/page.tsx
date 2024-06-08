@@ -9,8 +9,11 @@ export default function Page() {
         <Link href="/tasks/guess-the-word" className="block underline text-lg">
           Guess the word
         </Link>
-        <Link href="/tasks/find-a-mistake" className="block underline text-lg">
-          Find a mistake
+        <Link
+          href="/tasks/find-the-mistake"
+          className="block underline text-lg"
+        >
+          Find the mistake
         </Link>
       </div>
     </div>

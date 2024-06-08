@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import { WordData } from "@/app/actions";
+import { GuessTheWordData } from "@/app/actions";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 const GuessTheWordForm = ({
   wordsData,
 }: {
-  wordsData: (WordData & { value: string })[];
+  wordsData: (GuessTheWordData & { value: string })[];
 }) => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
