@@ -38,12 +38,7 @@ export default function Page() {
           Start
         </button>
       ) : (
-        <FindTheMistakeForm
-        // wordsData={generatedData.map((v, i) => ({
-        //   value: words[i],
-        //   ...v,
-        // }))}
-        />
+        <FindTheMistakeForm sentencesData={generatedData} />
       )}
     </div>
   );

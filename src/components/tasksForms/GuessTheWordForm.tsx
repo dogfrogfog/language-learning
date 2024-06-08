@@ -37,10 +37,12 @@ const GuessTheWordForm = ({
         <div className="flex flex-col items-center justify-between">
           <div className="space-y-4">
             <h2 className="text-center">Task {step + 1}</h2>
-            <p className="font-bold text-center">Choose correct option</p>
-            <p>
-              Description: <i>{wordsData[step].description}</i>
-            </p>
+            <div>
+              <p className="mb-2 font-semibold">Description:</p>
+              <p>
+                <i>{wordsData[step].description}</i>
+              </p>
+            </div>
           </div>
           <div className="mt-20 space-y-6">
             {answerOptions.map((v) => (
@@ -75,7 +77,7 @@ const GuessTheWordForm = ({
             ))}
           </div>
           <Link href="/tasks" className="p-3 rounded bg-orange-200">
-            Back to list of words
+            Back to tasks
           </Link>
         </div>
       )}
