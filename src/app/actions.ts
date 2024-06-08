@@ -50,7 +50,7 @@ export async function getFindTheMistakeData(input: string) {
 
   const { object: JSONdata } = await generateObject({
     model: mistral("open-mixtral-8x7b"),
-    system: `You are an AI language model specialized in language learning exercises. Your task is to generate sentences with intentional grammatical mistakes for students to identify and correct. For each word should be generated one sentence. Each sentence should include one word from the provided array of words. For each sentence, identify the incorrect part, provide the correct version, and explain why it is incorrect. Ensure that the mistakes cover a variety of common grammar issues, such as verb tense, subject-verb agreement, prepositions, and articles.`,
+    system: `You are an specialist in language learning exercises in english. Your task is to generate sentences with intentional grammatical mistakes for students to identify and correct. For each word should be generated one sentence. Each sentence should include one word from the provided array of words. For each sentence, identify the incorrect part, provide the correct version, and explain why it is incorrect. Ensure that the mistakes cover a variety of common grammar issues, such as verb tense, subject-verb agreement, prepositions, and articles. Ensure to generate sentance on random topic.`,
     prompt: `Generate sentences with grammatical mistakes using the provided words: ${input}. For each word from the list should be generated one sentence. Structure the output in the specified JSON format. 
 `,
     schema: z.object({
