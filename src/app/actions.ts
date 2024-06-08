@@ -50,9 +50,22 @@ export async function getFindTheMistakeData(input: string) {
 
   const { object: JSONdata } = await generateObject({
     model: mistral("open-mixtral-8x7b"),
-    system: `You are an specialist in language learning exercises in english. Your task is to generate sentences with intentional grammatical mistakes for students to identify and correct. For each word should be generated one sentence. Each sentence should include one word from the provided array of words. For each sentence, identify the incorrect part, provide the correct version, and explain why it is incorrect. Ensure that the mistakes cover a variety of common grammar issues, such as verb tense, subject-verb agreement, prepositions, and articles. Ensure to generate sentance on random topic.`,
-    prompt: `Generate sentences with grammatical mistakes using the provided words: ${input}. For each word from the list should be generated one sentence. Structure the output in the specified JSON format. 
-`,
+    system: `
+        You are a specialist in language learning exercises in English. Your task is to generate sentences with intentional grammatical mistakes for students to identify and correct. Follow these guidelines strictly:
+
+      1. For each word in the provided array, generate exactly one sentence.
+      2. Each sentence must include one word from the provided array.
+      3. Identify the incorrect part of the sentence, provide the correct version, and explain why it is incorrect.
+      4. Ensure that the mistakes cover a variety of common grammar issues, such as verb tense, subject-verb agreement, prepositions, and articles.
+      5. Ensure the sentences are on random, child-friendly topics and exclude any inappropriate content such as conflicts, war, violence, or gender issues.
+
+      Here are the comma separated words: ${input}
+
+      Generate one sentence for each word, resulting in a total of ${
+        input.split(",").length
+      } sentences.
+    `,
+    prompt: `Generate sentences with grammatical mistakes using the following comma separated words: ${input}. Each sentence should include one word from the list and follow the guidelines provided. Structure the output in the specified JSON format.`,
     schema: z.object({
       data: z.array(findTheMistakeDataSchema),
     }),

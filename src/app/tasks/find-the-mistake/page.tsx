@@ -22,7 +22,7 @@ export default function Page() {
 
             setIsLoading(true);
             try {
-              const { data } = await getFindTheMistakeData(words.join(","));
+              const { data } = await getFindTheMistakeData(words.join(", "));
 
               console.log(data);
 
