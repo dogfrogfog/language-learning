@@ -32,20 +32,24 @@ export default function FindAMistakeForm({
 
   return (
     <div className="px-10 min-h-screen">
-      {beforeMistakePart && afterMistakePart && step < sentencesData.length && (
+      {step < sentencesData.length && (
         <div className="flex flex-col items-center justify-between">
           <h2 className="text-center">Task {step + 1}</h2>
           <div className="mt-20 space-y-6">
-            <div>
-              <button onClick={() => handleOptionSelect(false)}>
-                {beforeMistakePart}
-              </button>{" "}
-              <button onClick={() => handleOptionSelect(true)}>
+            <div className="">
+              {beforeMistakePart && (
+                <span onClick={() => handleOptionSelect(false)}>
+                  {beforeMistakePart}
+                </span>
+              )}
+              <span onClick={() => handleOptionSelect(true)}>
                 {sentencesData[step].mistake}
-              </button>{" "}
-              <button onClick={() => handleOptionSelect(false)}>
-                {afterMistakePart}
-              </button>
+              </span>{" "}
+              {afterMistakePart && (
+                <span onClick={() => handleOptionSelect(false)}>
+                  {afterMistakePart}
+                </span>
+              )}
             </div>
             {isAnswered && (
               <>
